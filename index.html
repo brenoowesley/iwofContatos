@@ -141,11 +141,33 @@
             // Nova URL da planilha publicada
             const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT2y56LkAI0gPlnI8b6Y9m2v0BS3nLGFeVLwimOUm5cuS-gMaa7HsxGGrezgyWPgtaJskbS1kgJvw-K/pub?output=csv';
 
+            // URL do Web App de tracking (Google Apps Script)
+            const TRACKING_API_URL = 'https://script.google.com/macros/s/AKfycbxfXIz4NzrP1KOfWeIccpsumupUypNy7wvN20LM0_j3ruoSAERp98dR_9WJ55K9oQGg/exec';
+
             // Referências aos elementos do DOM
             const linkContainer = document.getElementById('link-container');
             const loading = document.getElementById('loading');
             const errorMessage = document.getElementById('error-message');
             document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Função para registrar o clique no link
+            function trackClick(linkName) {
+                const payload = JSON.stringify({ link: linkName });
+
+                // Usa sendBeacon para garantir que o request seja enviado mesmo com navegação
+                if (navigator.sendBeacon) {
+                    const blob = new Blob([payload], { type: 'application/json' });
+                    navigator.sendBeacon(TRACKING_API_URL, blob);
+                } else {
+                    // Fallback para fetch com keepalive
+                    fetch(TRACKING_API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: payload,
+                        keepalive: true
+                    }).catch(err => console.warn('Erro ao registrar clique:', err));
+                }
+            }
 
             // Dados de exemplo caso a planilha falhe (para design)
             const MOCK_DATA = [
@@ -263,6 +285,11 @@
                     el.target = '_blank';
                     el.rel = 'noopener noreferrer';
                     el.classList.add('bg-iwof-pink', 'hover:scale-105', 'hover:shadow-xl');
+
+                    // Adiciona tracking de clique
+                    el.addEventListener('click', () => {
+                        trackClick(nome);
+                    });
                 } else {
                     el.classList.add('bg-gray-400', 'opacity-70', 'cursor-not-allowed');
                 }
