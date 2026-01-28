@@ -152,21 +152,13 @@
 
             // Função para registrar o clique no link
             function trackClick(linkName) {
-                const payload = JSON.stringify({ link: linkName });
-
-                // Usa sendBeacon para garantir que o request seja enviado mesmo com navegação
-                if (navigator.sendBeacon) {
-                    const blob = new Blob([payload], { type: 'application/json' });
-                    navigator.sendBeacon(TRACKING_API_URL, blob);
-                } else {
-                    // Fallback para fetch com keepalive
-                    fetch(TRACKING_API_URL, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: payload,
-                        keepalive: true
-                    }).catch(err => console.warn('Erro ao registrar clique:', err));
-                }
+                // Usa Image beacon (GET request) para evitar problemas de CORS
+                const params = new URLSearchParams({
+                    link: linkName,
+                    t: Date.now() // Cache buster
+                });
+                const img = new Image();
+                img.src = `${TRACKING_API_URL}?${params.toString()}`;
             }
 
             // Dados de exemplo caso a planilha falhe (para design)
