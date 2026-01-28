@@ -4,55 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Central de Contatos de Suporte</title>
-    <!-- Carrega o Tailwind CSS para estilos rápidos -->
+    <title>@iwof_br | Links</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Importa a fonte 'Inter', que é limpa e moderna -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-            /* Cor de fundo padrão */
-            background-image: url('https://imgur.com/f9IqFb4.jpg');
-            /* ESTA URL SERÁ ATUALIZADA PELA IMAGEM GERADA */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            /* Mantém a imagem fixa ao rolar */
-            display: flex;
-            /* Para centralizar o conteúdo verticalmente */
-            align-items: center;
-            /* Centraliza verticalmente */
-            justify-content: center;
-            /* Centraliza horizontalmente */
+            background-color: #1a1a1a;
             min-height: 100vh;
-            /* Garante que o body ocupe a altura total da viewport */
-            position: relative;
-            /* Necessário para o overlay */
+            margin: 0;
+            padding: 0;
         }
 
-        /* Overlay para escurecer/embaçar ainda mais o fundo e garantir legibilidade */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(26, 0, 10, 0.7);
-            /* Branco semi-transparente para o blur */
-            backdrop-filter: blur(8px);
-            /* Aplica o blur no overlay */
-            z-index: -1;
-            /* Fica abaixo do conteúdo principal */
-        }
-
-        /* Cores da marca iWof */
+        /* Cores da marca */
         .text-iwof-pink {
             color: #E8368F;
-            /* Cor rosa da Image 2 */
         }
 
         .bg-iwof-pink {
@@ -61,84 +32,209 @@
 
         .bg-iwof-pink:hover {
             background-color: #d12e80;
-            /* Um tom mais escuro para o hover */
         }
 
-        .border-iwof-pink {
-            border-color: #E8368F;
+        /* Card de link estilo Linktree */
+        .link-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #1a1a1a;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Cor azul escura da logo */
-        .bg-iwof-darkblue {
-            background-color: #004a91;
-            /* Cor da Image 1 */
+        .link-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
         }
 
-        .text-iwof-darkblue {
-            color: #004a91;
+        .link-card.inactive {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
-        /* Estilos para o ícone do WhatsApp */
-        .whatsapp-icon {
-            filter: brightness(0) invert(1);
-            /* Torna o ícone branco para contrastar com o fundo */
+        .link-card.inactive:hover {
+            transform: none;
+        }
+
+        /* Ícone do card */
+        .link-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .link-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Título da categoria */
+        .category-title {
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 16px;
+            margin-top: 32px;
+        }
+
+        .category-title:first-of-type {
+            margin-top: 24px;
+        }
+
+        /* Ícones sociais */
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            transition: opacity 0.2s;
+        }
+
+        .social-icon:hover {
+            opacity: 0.8;
+        }
+
+        /* Logo circular */
+        .logo-container {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            overflow: hidden;
+        }
+
+        .logo-container img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Botão CTA no rodapé */
+        .cta-button {
+            background-color: #E8368F;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 24px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+
+        .cta-button:hover {
+            background-color: #d12e80;
+            transform: scale(1.02);
         }
     </style>
 </head>
 
-<body class="p-4">
+<body>
+    <div class="w-full max-w-md mx-auto px-4 py-8 min-h-screen flex flex-col">
 
-    <div class="w-full max-w-lg mx-auto bg-white p-6 md:p-8 rounded-xl shadow-2xl relative z-10">
+        <!-- Cabeçalho com logo e perfil -->
+        <header class="text-center">
+            <!-- Logo circular -->
+            <div class="logo-container">
+                <img src="https://i.imgur.com/YourLogoHere.png" alt="Logo iWof"
+                    onerror="this.parentElement.innerHTML='<span class=\'text-3xl font-bold text-iwof-pink\'>iWof</span>'">
+            </div>
 
-        <!-- Cabeçalho com logo e título -->
-        <header class="text-center mb-8">
-            <!-- Logo fornecida pelo usuário --><img src="https://imgur.com/a/mekhc74.jpg" alt="Logo iWof"
-                class="h-16 mx-auto mb-4" onerror="this.style.display='none'">
-            <h1 class="text-3xl font-bold text-gray-800">@iwof_br</h1>
-            <p class="text-gray-600 mt-1">Trabalhe do seu jeito, fazendo sua própria escala.
-            </p>
+            <!-- Nome do perfil -->
+            <h1 class="text-xl font-bold text-white">@iwof_br</h1>
+
+            <!-- Descrição -->
+            <p class="text-gray-400 mt-1 text-sm">Trabalhe do seu jeito, fazendo sua própria escala. 💜</p>
+
+            <!-- Ícones sociais -->
+            <div class="flex justify-center gap-4 mt-4">
+                <!-- Instagram -->
+                <a href="https://instagram.com/iwof_br" target="_blank" rel="noopener noreferrer" class="social-icon"
+                    title="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <!-- WhatsApp -->
+                <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="social-icon"
+                    title="WhatsApp">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                    </svg>
+                </a>
+            </div>
         </header>
 
-        <!-- Mensagem de Erro/Instrução -->
-        <div id="error-message"
-            class="hidden bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6 rounded-md shadow-sm">
-            <p class="font-bold">Atenção!</p>
-            <p>Não foi possível carregar os dados da planilha. Por favor, certifique-se de que você publicou a planilha
-                corretamente.</p>
-            <p class="mt-2 text-sm">Instruções: Abra a planilha, vá em <code
-                    class="bg-gray-200 p-1 rounded">Arquivo</code> > <code
-                    class="bg-gray-200 p-1 rounded">Compartilhar</code> > <code
-                    class="bg-gray-200 p-1 rounded">Publicar na web</code> e publique como <code
-                    class="bg-gray-200 p-1 rounded">Valores separados por vírgula (.csv)</code>.</p>
-        </div>
-
         <!-- Indicador de Carregamento -->
-        <div id="loading" class="flex justify-center items-center py-10 text-iwof-darkblue">
-            <svg class="animate-spin h-8 w-8 text-iwof-darkblue" xmlns="http://www.w3.org/2000/svg" fill="none"
+        <div id="loading" class="flex justify-center items-center py-16">
+            <svg class="spinner h-8 w-8 text-iwof-pink" xmlns="http://www.w3.org/2000/svg" fill="none"
                 viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor"
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
                 </path>
             </svg>
-            <span class="ml-3 text-gray-700 font-semibold">Carregando contatos...</span>
         </div>
 
-        <!-- Container para os links (cards) -->
-        <main id="link-container" class="space-y-4">
-            <!-- Os cards de contato serão injetados aqui pelo JavaScript -->
+        <!-- Mensagem de Erro -->
+        <div id="error-message"
+            class="hidden bg-red-900/50 border border-red-500 text-red-200 p-4 rounded-lg text-center text-sm">
+            <p>Não foi possível carregar os links. Tente novamente mais tarde.</p>
+        </div>
+
+        <!-- Container para os links agrupados por categoria -->
+        <main id="link-container" class="flex-grow">
+            <!-- Links serão injetados aqui pelo JavaScript -->
         </main>
 
         <!-- Rodapé -->
-        <footer class="text-center mt-8 text-gray-500 text-sm">
-            <p>&copy; <span id="current-year"></span> iWof. Todos os direitos reservados.</p>
+        <footer class="text-center mt-8 pt-8 border-t border-gray-800">
+            <a href="https://iwof.com.br" target="_blank" rel="noopener noreferrer" class="cta-button">
+                Join iWofBrasil
+            </a>
+            <p class="text-gray-600 text-xs mt-6">&copy; <span id="current-year"></span> iWof. Todos os direitos
+                reservados.</p>
         </footer>
 
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Nova URL da planilha publicada
+            // URL da planilha publicada
             const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT2y56LkAI0gPlnI8b6Y9m2v0BS3nLGFeVLwimOUm5cuS-gMaa7HsxGGrezgyWPgtaJskbS1kgJvw-K/pub?output=csv';
 
             // URL do Web App de tracking (Google Apps Script)
@@ -150,37 +246,40 @@
             const errorMessage = document.getElementById('error-message');
             document.getElementById('current-year').textContent = new Date().getFullYear();
 
+            // Ícones por tipo
+            const ICONS = {
+                whatsapp: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`,
+                link: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8368F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>`,
+                cadastro: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8368F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>`,
+                android: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#3DDC84"><path d="M17.523 15.341a.85.85 0 0 0 .85-.849v-4.51a.85.85 0 0 0-1.7 0v4.51a.85.85 0 0 0 .85.85zm-11.046 0a.85.85 0 0 0 .85-.849v-4.51a.85.85 0 0 0-1.7 0v4.51a.85.85 0 0 0 .85.85zM15.2 5.2l1.138-2.072a.24.24 0 1 0-.42-.231L14.76 5.02a6.036 6.036 0 0 0-5.52 0L8.082 2.897a.24.24 0 1 0-.42.23L8.8 5.2a5.59 5.59 0 0 0-3.05 4.95h12.5A5.59 5.59 0 0 0 15.2 5.2zM9.65 8.1a.6.6 0 1 1 .6-.6.6.6 0 0 1-.6.6zm4.7 0a.6.6 0 1 1 .6-.6.6.6 0 0 1-.6.6zM5.75 10.65v6.1a1.65 1.65 0 0 0 1.65 1.65h.5v2.45a.85.85 0 0 0 1.7 0v-2.45h2.8v2.45a.85.85 0 0 0 1.7 0v-2.45h.5a1.65 1.65 0 0 0 1.65-1.65v-6.1z"/></svg>`,
+                ios: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>`,
+                camisa: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#FFD700"><path d="M20.38 8.57l-1.23 1.85a1 1 0 0 1-.84.45H16V6h3.62a1 1 0 0 1 .76.35l0 0a1 1 0 0 1 0 1.17zM4.38 10.87a1 1 0 0 1-.84-.45L2.31 8.57a1 1 0 0 1 0-1.17l0 0A1 1 0 0 1 3.07 7H6v4zM7 11V6h10v5a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1zm-1 1h12v8a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1z"/></svg>`,
+                ajuda: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8368F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>`,
+                site: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8368F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`
+            };
+
             // Função para registrar o clique no link
             function trackClick(linkName) {
                 console.log('🔹 Tracking clique:', linkName);
-                // Usa Image beacon (GET request) para evitar problemas de CORS
                 const params = new URLSearchParams({
                     link: linkName,
-                    t: Date.now() // Cache buster
+                    t: Date.now()
                 });
                 const img = new Image();
                 img.src = `${TRACKING_API_URL}?${params.toString()}`;
-                console.log('🔹 URL de tracking:', img.src);
             }
-
-            // Dados de exemplo caso a planilha falhe (para design)
-            const MOCK_DATA = [
-                { contato: '+55 11 99999-9999', nome: 'Suporte Vendas (Ativo)', status: 'ativo', tipo: 'whatsapp' },
-                { contato: '+55 11 88888-8888', nome: 'Suporte Técnico (Ativo)', status: 'ativo', tipo: 'whatsapp' },
-                { contato: 'https://google.com', nome: 'Link Externo (Ativo)', status: 'ativo', tipo: 'link' },
-                { contato: '+55 11 77777-7777', nome: 'Contato Geral (Inativo)', status: 'inativo', tipo: 'whatsapp' }
-            ];
 
             // Função principal para buscar e renderizar os dados
             async function fetchData() {
                 loading.classList.remove('hidden');
                 errorMessage.classList.add('hidden');
+                linkContainer.innerHTML = '';
 
                 try {
                     const response = await fetch(CSV_URL);
 
                     if (!response.ok) {
-                        throw new Error('Falha ao buscar CSV. Planilha provavelmente não publicada ou URL incorreta.');
+                        throw new Error('Falha ao buscar CSV');
                     }
 
                     const csvText = await response.text();
@@ -188,116 +287,131 @@
                     renderData(data);
 
                 } catch (error) {
-                    console.error("Erro ao carregar dados da planilha:", error);
+                    console.error("Erro ao carregar dados:", error);
                     errorMessage.classList.remove('hidden');
-                    renderData(MOCK_DATA); // Renderiza dados mockados em caso de erro real
                 } finally {
                     loading.classList.add('hidden');
                 }
             }
 
-            // Função para converter o texto CSV em um array de objetos
+            // Função para converter CSV em array de objetos
+            // Colunas esperadas: Contato, Nome, Status, Tipo, Categoria
             function parseCSV(text) {
-                const lines = text.split('\n').filter(line => line.trim() !== ''); // Filtra linhas vazias
+                const lines = text.split('\n').filter(line => line.trim() !== '');
                 if (lines.length === 0) return [];
 
-                // Assume que a primeira linha é o cabeçalho e ignora
                 const data = lines.slice(1).map(line => {
-                    // Usar um regex para splitar por vírgula, mas ignorar vírgulas dentro de aspas
                     const parts = line.match(/(?:[^,"']+|"[^"]*")+/g);
-                    if (!parts || parts.length < 3) return null; // Garante que a linha tem pelo menos 3 colunas
+                    if (!parts || parts.length < 3) return null;
 
-                    const [contato, nome, status, tipo] = parts.map(part => part.replace(/^"|"$/g, '').trim()); // Remove aspas e trim
+                    const [contato, nome, status, tipo, categoria] = parts.map(part =>
+                        part.replace(/^"|"$/g, '').trim()
+                    );
 
                     return {
                         contato: contato || '',
                         nome: nome || '',
-                        status: status ? status.toLowerCase() : '', // Normaliza o status
-                        tipo: tipo ? tipo.toLowerCase() : 'whatsapp' // Normaliza o tipo, padrão whatsapp
+                        status: status ? status.toLowerCase() : '',
+                        tipo: tipo ? tipo.toLowerCase() : 'link',
+                        categoria: categoria || 'Links'
                     };
-                }).filter(item => item && item.nome && item.status); // Filtra itens nulos ou incompletos
+                }).filter(item => item && item.nome && item.status);
 
                 return data;
             }
 
-            // Função para renderizar os dados na tela
+            // Função para renderizar os dados agrupados por categoria
             function renderData(data) {
-                linkContainer.innerHTML = ''; // Limpa o container
+                linkContainer.innerHTML = '';
 
                 if (data.length === 0) {
-                    linkContainer.innerHTML = '<p class="text-center text-gray-500">Nenhum contato encontrado.</p>';
+                    linkContainer.innerHTML = '<p class="text-center text-gray-500 py-8">Nenhum link encontrado.</p>';
                     return;
                 }
 
+                // Agrupa por categoria mantendo a ordem de aparição
+                const categories = [];
+                const categoryMap = new Map();
+
                 data.forEach(item => {
-                    const card = createLinkCard(item);
-                    linkContainer.appendChild(card);
+                    if (!categoryMap.has(item.categoria)) {
+                        categoryMap.set(item.categoria, []);
+                        categories.push(item.categoria);
+                    }
+                    categoryMap.get(item.categoria).push(item);
+                });
+
+                // Renderiza cada categoria
+                categories.forEach(category => {
+                    const items = categoryMap.get(category);
+
+                    // Título da categoria
+                    const titleEl = document.createElement('h2');
+                    titleEl.className = 'category-title';
+                    titleEl.textContent = category;
+                    linkContainer.appendChild(titleEl);
+
+                    // Container dos links dessa categoria
+                    const categoryContainer = document.createElement('div');
+                    categoryContainer.className = 'space-y-3';
+
+                    items.forEach(item => {
+                        const card = createLinkCard(item);
+                        categoryContainer.appendChild(card);
+                    });
+
+                    linkContainer.appendChild(categoryContainer);
                 });
             }
 
-            // Função para criar um card de contato
+            // Função para obter ícone baseado no tipo ou nome
+            function getIcon(tipo, nome) {
+                const nomeLower = nome.toLowerCase();
+
+                if (nomeLower.includes('cadastro') || nomeLower.includes('acelere')) return ICONS.cadastro;
+                if (nomeLower.includes('android')) return ICONS.android;
+                if (nomeLower.includes('ios') || nomeLower.includes('iphone')) return ICONS.ios;
+                if (nomeLower.includes('camisa') || nomeLower.includes('camiseta')) return ICONS.camisa;
+                if (nomeLower.includes('ajuda') || nomeLower.includes('central')) return ICONS.ajuda;
+                if (nomeLower.includes('site')) return ICONS.site;
+                if (tipo === 'whatsapp') return ICONS.whatsapp;
+
+                return ICONS.link;
+            }
+
+            // Função para criar um card de link
             function createLinkCard(item) {
                 const { nome, contato, status, tipo } = item;
                 const isActive = status === 'ativo';
-                const isLink = tipo === 'link';
 
                 let href = '#';
-                let iconHtml = '';
-
                 if (isActive) {
-                    if (isLink) {
-                        // Se for link, usa o valor do contato como URL
-                        // Adiciona https:// se não tiver protocolo
-                        href = contato.match(/^https?:\/\//) ? contato : `https://${contato}`;
-
-                        // Ícone de Link/Formulário (SVG)
-                        iconHtml = `
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-4 flex-shrink-0 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg>
-                        `;
-                    } else {
-                        // Comportamento padrão (WhatsApp)
-                        const waNumber = contato.replace(/\D/g, ''); // Remove caracteres não numéricos
+                    if (tipo === 'whatsapp') {
+                        const waNumber = contato.replace(/\D/g, '');
                         href = `https://wa.me/${waNumber}`;
-
-                        // Ícone do WhatsApp (Imagem existente)
-                        iconHtml = `
-                            <img src="https://imgur.com/oR4cu8N.png" 
-                                 alt="WhatsApp Icon" 
-                                 class="h-8 w-8 mr-4 whatsapp-icon flex-shrink-0">
-                        `;
+                    } else {
+                        href = contato.match(/^https?:\/\//) ? contato : `https://${contato}`;
                     }
                 }
 
                 const el = document.createElement(isActive ? 'a' : 'div');
-
-                el.className = `flex items-center w-full p-5 rounded-lg shadow-md text-white transition-all duration-300 transform`;
+                el.className = `link-card ${isActive ? '' : 'inactive'}`;
 
                 if (isActive) {
                     el.href = href;
                     el.target = '_blank';
                     el.rel = 'noopener noreferrer';
-                    el.classList.add('bg-iwof-pink', 'hover:scale-105', 'hover:shadow-xl');
-
-                    // Adiciona tracking de clique
-                    el.addEventListener('click', () => {
-                        trackClick(nome);
-                    });
-                } else {
-                    el.classList.add('bg-gray-400', 'opacity-70', 'cursor-not-allowed');
+                    el.addEventListener('click', () => trackClick(nome));
                 }
 
                 el.innerHTML = `
-                    ${iconHtml}
-                    <div class="flex-grow">
-                        <div class="font-bold text-lg">${nome}</div>
+                    <div class="link-icon">
+                        ${getIcon(tipo, nome)}
                     </div>
-                    <div class="ml-4 flex-shrink-0">
-                        <span class="text-xs font-semibold px-3 py-1 rounded-full ${isActive ? 'bg-green-500' : 'bg-gray-700'}">
-                            ${isActive ? 'Ativo' : 'Inativo'}
-                        </span>
+                    <div class="flex-grow text-center">
+                        <span class="font-medium text-sm">${nome}</span>
                     </div>
+                    <div class="w-8"></div>
                 `;
 
                 return el;
