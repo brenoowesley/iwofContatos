@@ -152,6 +152,7 @@
 
             // Função para registrar o clique no link
             function trackClick(linkName) {
+                console.log('🔹 Tracking clique:', linkName);
                 // Usa Image beacon (GET request) para evitar problemas de CORS
                 const params = new URLSearchParams({
                     link: linkName,
@@ -159,6 +160,7 @@
                 });
                 const img = new Image();
                 img.src = `${TRACKING_API_URL}?${params.toString()}`;
+                console.log('🔹 URL de tracking:', img.src);
             }
 
             // Dados de exemplo caso a planilha falhe (para design)
